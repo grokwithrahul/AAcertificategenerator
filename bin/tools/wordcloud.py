@@ -8,12 +8,11 @@ def createWordCloud(csvpath):
     freq = strengthFrequency(30, list_of_sentences)
     mask = chooseMask(list_of_sentences)
 
-
     wordcloud = sentencecloud.WordCloud(width=1000, height=1000,
-                          background_color='black',
-                          min_font_size=20,
-                          max_font_size=400,
-                          mask=mask).generate(freq)
+                                        background_color='black',
+                                        min_font_size=20,
+                                        max_font_size=400,
+                                        mask=mask).generate(freq)
 
     return wordcloud
 

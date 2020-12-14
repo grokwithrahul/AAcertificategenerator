@@ -1,7 +1,7 @@
 import unittest
 import sys
 sys.path.append("../certificategenerator/certificate.py")
-import bin._tools as testmodule
+import bin.tools as testmodule
 
 class testThankyou(unittest.TestCase):
     names = ["", "a", "Rahul", "1234567890123456", "12345679012345678901234567890123456", None, 1, 5, 0.3, True]
