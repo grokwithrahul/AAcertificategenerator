@@ -4,6 +4,7 @@ from bin.tools import sketch as imgsketch
 from bin.tools import signature as signaturegen
 from bin.tools import wordcloud as wc
 from bin.tools import _tools
+import cv2
 #from sentencecloud_generator import x
 import os
 
@@ -28,16 +29,19 @@ class certificate():
     def error_handler(self):
         if not self.configdone:
             raise Exception('[Errno 1] Config not run')
-        if not os.path.exists(self.csvpath) or os.path.exists(self.imgpath):
-            raise FileNotFoundError('[Errno 2] File at specified path does not exist')
+        if not os.path.exists(self.csvpath):
+            raise FileNotFoundError('[Errno 2] CSV File at specified path does not exist')
+        if not os.path.exists(self.imgpath):
+            raise FileNotFoundError('[Errno 3] Image File at specified path does not exist')
 
     def generate(self):
         self.error_handler()
         image = imgsketch.getSketch(self.imgpath)
-        wordcloud = wc.createWordCloud(self.csvpath)
-        thankyou = ty.getThankYouImg(self.tyname)
-        signature = signaturegen.getSignature(self.signaturenamename)
-        out = _tools.overlayImgs(self.style, image, wordcloud, thankyou=thankyou, signature=signature)
+        #wordcloud = wc.createWordCloud(self.csvpath)
+        wordcloud = cv2.imread('out.png')
+        wordcloud = cv2.resize(wordcloud, (1000, 1000))
+        #cv2.imsave('wc.png', wordcloud)
+        out = _tools.overlayImgs(self.style, image, wordcloud, thankyouname=self.tyname, signaturename=self.signaturename)
         return out
 
 

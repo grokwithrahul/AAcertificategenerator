@@ -1,18 +1,17 @@
 import sentencecloud
-from PIL import Image
+import cv2
 import numpy as np
 
 
 def createWordCloud(csvpath):
     list_of_sentences = readCSV(csvpath)
     freq = strengthFrequency(30, list_of_sentences)
-    mask = chooseMask(list_of_sentences)
 
     wordcloud = sentencecloud.WordCloud(width=1000, height=1000,
                                         background_color='black',
                                         min_font_size=20,
                                         max_font_size=400,
-                                        mask=mask).generate(freq)
+                                        ).generate(freq)
 
     return wordcloud
 
@@ -40,8 +39,9 @@ def strengthFrequency(count, list_of_sentences):
 
 def chooseMask(list_of_sentences):
     length = len(list_of_sentences)
-    maskname = 'jetfighter.jpg' if length > 25 else 'diamond.jpg' if length > 20 else 'oval.jpg'\
-        if length > 15 else 'triangle.jpg'
-    custom_mask = np.array(Image.open(maskname))
+    #maskname = 'jetfighter.jpg' if length > 25 else 'diamond.jpg' if length > 20 else 'oval.jpg'\
+        #if length > 15 else 'triangle.jpg'
+    #maskname = "./data/backgrounds/"+maskname
+    #custom_mask = cv2.imread(maskname)
 
-    return custom_mask
+    #return custom_mask

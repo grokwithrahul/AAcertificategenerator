@@ -1,6 +1,6 @@
 import unittest
 import sys
-sys.path.append("../certificategenerator/certificate.py")
+sys.path.append("../../certificategenerator/certificate.py")
 import bin.tools as testmodule
 
 class testThankyou(unittest.TestCase):
